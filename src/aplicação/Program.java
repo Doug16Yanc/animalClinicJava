@@ -1,5 +1,13 @@
 package aplicação;
 
+/*Desenvolvido por Douglas Holanda, programa Java que realiza o gerenciamento de
+* uma clínica veterinária com as entidades principais Veterinário, Cliente e Animal.
+* O projeto segue critérios de arquitetura de sistemas e engenharia de software e é
+* baseado numa proposta de diagrama de modelo de linguagem unificada (UML) obtida
+* a partir do best-seller nacional "UML 2 : Uma abordagem prática", de Guilleanes
+* Guedes, professor de ciência da computação da Universidade Federal do Pampa (UniPampa)*/
+
+
 import utilidades.Util;
 import utilidades.Util.*;
 
