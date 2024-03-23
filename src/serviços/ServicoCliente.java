@@ -6,9 +6,7 @@ import repositórios.EuValido;
 import utilidades.Comprovação;
 import utilidades.Util;
 
-import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,16 +52,18 @@ public class ServicoCliente implements EuValido {
                 System.out.println("Senha : ");
                 String senha = sc.nextLine();
 
-                if (usuario.equals(procurado.getUsuario()) && usuario.equals(procurado.getSenha())) {
+                if (usuario.equals(procurado.getUsuario()) && senha.equals(procurado.getSenha())) {
                     System.out.println("Login realizado com sucesso.\n");
-                    validou = true;
+                    interageCliente(procurado);
+                    break;
                 } else {
-
+                    new Util().print("Credenciais inválidas.\n");
                 }
             } else{
                 System.out.println("Cliente não encontrado.\n");
             }
         } while(true);
+        return validou;
     }
     public int geraId() {
         int entrada = new Random().nextInt(900000) + 100;
@@ -128,10 +128,10 @@ public class ServicoCliente implements EuValido {
                     visualizarDados(cliente);
                 }
                 case 2 -> {
-
+                    alterarDados(cliente);
                 }
                 case 3 -> {
-
+                    removerCadastro(cliente);
                 }
                 case 4 -> {
 
@@ -216,5 +216,8 @@ public class ServicoCliente implements EuValido {
             }
         }
         return opcao;
+    }
+    private boolean removerCadastro(Cliente cliente){
+        return true;
     }
 }

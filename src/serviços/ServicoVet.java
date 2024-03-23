@@ -1,9 +1,14 @@
 package serviços;
 
+import domínio.Animal;
+import domínio.Consulta;
 import domínio.Veterinário;
 import repositórios.EuValido;
 import utilidades.Util;
 
+import java.util.List;
+
+import static serviços.ServicoAnimal.consultas;
 import static utilidades.Util.sc;
 
 public class ServicoVet implements EuValido {
@@ -72,7 +77,27 @@ public class ServicoVet implements EuValido {
         return opcao;
     }
     private int realizarConsultas(){
-
+        if (!consultas.isEmpty()){
+            Animal animal = consultas.remove(0).getAnimal();
+            new ConsultaServico().processaConsulta(animal);
+        }
+        else {
+            new Util().print("Nenhuma consulta marcada.\n");
+        }
         return 1;
+    }
+    private List<Consulta> listaConsultas(){
+        if (!consultas.isEmpty()) {
+            for (Consulta consulta : consultas) {
+                new Util().print("" +
+                        "\nIdentificador do cliente solicitante : " + consulta.getAnimal().getCliente().getIdCliente() +
+                        "\nNome do cliente solicitante : " + consulta.getAnimal().getCliente().getNomeCliente() +
+                        "\nIdentificador do animal : " + consulta.getAnimal().getIdAnimal() +
+                        "\nStatus da consulta : " + consulta.getStatusConsulta());
+            }
+        } else{
+            new Util().print("Nenhuma consulta marcada.\n");
+        }
+        return consultas;
     }
 }

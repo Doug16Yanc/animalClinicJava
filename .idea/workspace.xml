@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c8fd863c-2d92-4f1b-90b4-77aaadb3d700" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domínio/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domínio/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domínio/Consulta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domínio/Consulta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/SexoAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/SexoAnimal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serviços/ServicoAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviços/ServicoCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serviços/ServicoVet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoVet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilidades/Comprovação.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilidades/Comprovação.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

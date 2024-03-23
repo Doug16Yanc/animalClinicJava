@@ -19,7 +19,7 @@ import static utilidades.Util.sc;
 
 public class ServicoAnimal {
     private static List<Animal> animais = new ArrayList<>();
-    private static List<Consulta> consultas = new ArrayList<>();
+    public static List<Consulta> consultas = new ArrayList<>();
     public void iniciaPaginaAnimal(Cliente cliente){
         Animal animal = null;
         new Util().print("Página do pet.\n");
@@ -45,7 +45,7 @@ public class ServicoAnimal {
                 visualizarAnimalDados(animal);
             }
             case 5 -> {
-                marcaConsulta();
+                marcaConsulta(animal);
             }
             default -> {
                 new Util().print("Opção impossível.\n");
@@ -163,19 +163,22 @@ public class ServicoAnimal {
             switch (opcao.toLowerCase()){
                 case "c" ->{
                     consulta = new Consulta(animal, 70.00, StatusConsulta.CONVENCIONAL);
+                    consultas.add(consulta);
                 }
                 case "u" -> {
                     consulta = new Consulta(animal, 70.00, StatusConsulta.URGENTE);
+                    consultas.add(0, consulta);
                 }
                 default -> {
                     consulta = new Consulta(animal, 70.00, StatusConsulta.CONVENCIONAL);
+                    consultas.add(consulta);
                 }
             }
         }
         else {
             new Util().print("Animal não encontrado.\n");
         }
-        consultas.add(consulta);
+
         return String.format("Consulta " + UUID.randomUUID() + " marcada com sucesso.\n");
 
     }
