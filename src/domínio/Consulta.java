@@ -3,12 +3,22 @@ package domínio;
 import enums.StatusConsulta;
 
 public class Consulta {
+    private Animal animal;
     private Double valor;
     private StatusConsulta statusConsulta;
 
-    public Consulta(Double valor, StatusConsulta statusConsulta){
+    public Consulta(Animal animal, Double valor, StatusConsulta statusConsulta){
+        this.animal = animal;
         this.valor = valor;
         this.statusConsulta = statusConsulta;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
     public Double getValor() {

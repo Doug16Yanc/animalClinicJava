@@ -71,4 +71,8 @@ public class ServicoVet implements EuValido {
         } while (true);
         return opcao;
     }
+    private int realizarConsultas(){
+
+        return 1;
+    }
 }

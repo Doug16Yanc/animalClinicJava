@@ -2,5 +2,6 @@ package enums;
 
 public enum SexoAnimal {
     MASCULINO,
-    FEMININO
+    FEMININO,
+    OUTRO
 }

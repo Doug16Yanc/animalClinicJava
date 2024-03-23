@@ -10,13 +10,11 @@ public class Animal {
     private int idAnimal;
     private String nomeAnimal;
     private int idadeAnimal;
-
-    private SexoAnimal sexoAnimal;
     private Espécie especie;
-
+    private SexoAnimal sexoAnimal;
     private StatusAnimal statusAnimal;
 
-    public Animal(Cliente cliente, int idAnimal, String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Espécie especie, StatusAnimal statusAnimal){
+    public Animal(Cliente cliente, int idAnimal, String nomeAnimal, int idadeAnimal, Espécie especie, SexoAnimal sexoAnimal, StatusAnimal statusAnimal){
         this.cliente = cliente;
         this.idAnimal = idAnimal;
         this.nomeAnimal = nomeAnimal;
