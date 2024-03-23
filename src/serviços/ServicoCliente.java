@@ -6,9 +6,13 @@ import repositórios.EuValido;
 import utilidades.Comprovação;
 import utilidades.Util;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import static utilidades.Util.sc;
 
@@ -121,7 +125,7 @@ public class ServicoCliente implements EuValido {
 
             switch (opcao){
                 case 1 -> {
-
+                    visualizarDados(cliente);
                 }
                 case 2 -> {
 
@@ -134,16 +138,83 @@ public class ServicoCliente implements EuValido {
                 }
                 case 5 -> {
                     new Util().print("Sua despedida é desconcertante. Até logo!\n");
+                    saiu = true;
                 }
                 default -> {
                     new Util().print("Opção impossível.\n");
                 }
             }
-            if (opcao == 5){
-                saiu = true;
+            if (saiu){
                 break;
             }
         } while (true);
+        return opcao;
+    }
+    private void visualizarDados(Cliente cliente){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+        new Util().print("DADOS PESSOAIS.\n" +
+                "       Nome : " + cliente.getNomeCliente() +
+                "\n     Identificador : " + cliente.getIdCliente() +
+                "\n     Endereço : " + cliente.getEnderecoCliente() +
+                "\n     Email : " + cliente.getEmailCliente() +
+                "\n     DADOS DA OPERAÇÃO\n\n" +
+                "       Código da consulta : " + UUID.randomUUID() +
+                "\n     Data : " + formatter);
+    }
+    private String alterarDados(Cliente cliente){
+        new Util().print("Você só pode modificar endereço, email, usuário e senha.\n");
+        System.out.println("E/e - Endereço\n" +
+                "           C/c - Correio eletrônico(email)\n" +
+                "           U/u - Usuário\n" +
+                "           S/s - Senha\n");
+        String opcao = sc.nextLine();
+
+        switch (opcao.toLowerCase()){
+            case "e" -> {
+                System.out.println("Novo endereço: ");
+                String novoEndereco = sc.nextLine();
+                cliente.setEnderecoCliente(novoEndereco);
+            }
+            case "c" -> {
+                System.out.println("Novo email: ");
+                String novoEmail = sc.nextLine();
+                cliente.setEmailCliente(novoEmail);
+            }
+            case "u" -> {
+                System.out.println("Digite seu usuário atual : ");
+                String usuario = sc.nextLine();
+
+                cliente = clientes.stream().filter(valido -> valido.getUsuario().equals(usuario))
+                        .findFirst().orElse(null);
+                if(cliente != null){
+                    System.out.println("Novo usuário : ");
+                    String novoUsuario = sc.nextLine();
+                    cliente.setUsuario(novoUsuario);
+                }
+                else{
+                    System.out.println("Usuário não reconhecido.\n");
+                }
+
+            }
+            case "s" -> {
+                System.out.println("Digite sua senha atual : ");
+                String senha = sc.nextLine();
+
+                cliente = clientes.stream().filter(valido -> valido.getSenha().equals(senha))
+                        .findFirst().orElse(null);
+                if(cliente != null){
+                    System.out.println("Nova senha : ");
+                    String novaSenha = sc.nextLine();
+                    cliente.setSenha(novaSenha);
+                }
+                else{
+                    System.out.println("Senha não reconhecida.\n");
+                }
+            }
+            default -> {
+                new Util().print("Opção impossível.\n");
+            }
+        }
         return opcao;
     }
 }
