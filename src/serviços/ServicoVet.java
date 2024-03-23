@@ -10,6 +10,7 @@ public class ServicoVet implements EuValido {
     public boolean fazLogin(){
         Veterinário veterinário = new Veterinário("Douglas Holanda", "Brasil", "doug@gmail.com", "d", "1609");
         int chances = 3;
+        boolean validou = false;
         new Util().print("Faça login com suas credenciais.\n");
 
         do{
@@ -21,7 +22,7 @@ public class ServicoVet implements EuValido {
             if (usuario.equals(veterinário.getUsuario()) && senha.equals(veterinário.getSenha())){
                 System.out.println("Login feito com sucesso.\n");
                 interageVeterinario(veterinário);
-                break;
+                validou = true;
             }
             else{
                 System.out.println("Credenciais inválidas.\n");
@@ -34,11 +35,12 @@ public class ServicoVet implements EuValido {
 
         } while(chances > 0);
 
-        return true;
+        return validou;
     }
     private int interageVeterinario(Veterinário veterinário) {
         new Util().print("Seja bem-vindo(a), caríssimo(a) " + veterinário.getNomeVet());
         int opcao;
+        boolean saiu = false;
         do {
             System.out.println("Selecione uma opção:\n" +
                     "           1 - Realizar consulta.\n" +
@@ -55,11 +57,18 @@ public class ServicoVet implements EuValido {
                 }
                 case 3 -> {
                     new Util().print("Até a próxima!\n");
+                    saiu = true;
+                    sc.nextLine();
                 }
                 default -> {
                     new Util().print("Opção impossível.\n");
                 }
             }
+            if (saiu){
+                break;
+
+            }
         } while (true);
+        return opcao;
     }
 }
