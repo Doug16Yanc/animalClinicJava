@@ -24,7 +24,8 @@ public class ServicoAnimal {
         Animal animal = null;
         new Util().print("Página do pet.\n");
         System.out.println("O que desejas?\n");
-        System.out.println("1 - Registrar animal.\n" +
+        System.out.println("\n" +
+                "           1 - Registrar animal.\n" +
                 "           2 - Remover animal.\n" +
                 "           3 - Listar animais cadastrados.\n" +
                 "           4 - Ver situação de algum em específico.\n" +
@@ -78,6 +79,7 @@ public class ServicoAnimal {
         Animal animal = null;
         new Util().print("Registro de animal na clínica.\n");
         int idAnimal = geraId();
+        sc.nextLine();
         System.out.println("Nome do animal (Campo opcional) : ");
         String nome = sc.nextLine();
         System.out.println("Idade : ");
@@ -85,7 +87,7 @@ public class ServicoAnimal {
         sc.nextLine();
         System.out.println("Espécie (Campo opcional) : ");
         String especie = sc.nextLine();
-        System.out.println("Sexo : M/m - Macho \n F/f - Fêmea\n");
+        System.out.println("Sexo : \n M/m - Macho \n F/f - Fêmea\n");
         String sexo = sc.nextLine();
         switch (sexo.toLowerCase()){
             case "m" -> {
@@ -154,23 +156,25 @@ public class ServicoAnimal {
     }
     private String marcaConsulta(Animal animal){
         Consulta consulta = null;
+        UUID codigo = UUID.randomUUID();
         new Util().print("Consultas marcadas como urgentes apresentarão prioridades na lista das chamadas\n" +
                 "do profissional veterinário. Ao escolher convencional ou uma opção não existente, a consulta" +
-                "será considerada convencional.\n");
+                " será considerada convencional.\n");
         if(procurarAnimal() == true){
-            System.out.println("Estado da consulta solicitada? \n C/c - Convencional \n U/u - Urgente \n");
+            sc.nextLine();
+            System.out.println("\nEstado da consulta solicitada? \n C/c - Convencional \n U/u - Urgente \n");
             String opcao = sc.nextLine();
             switch (opcao.toLowerCase()){
                 case "c" ->{
-                    consulta = new Consulta(animal, 70.00, StatusConsulta.CONVENCIONAL);
+                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.CONVENCIONAL, null);
                     consultas.add(consulta);
                 }
                 case "u" -> {
-                    consulta = new Consulta(animal, 70.00, StatusConsulta.URGENTE);
+                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.URGENTE, null);
                     consultas.add(0, consulta);
                 }
                 default -> {
-                    consulta = new Consulta(animal, 70.00, StatusConsulta.CONVENCIONAL);
+                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.CONVENCIONAL, null);
                     consultas.add(consulta);
                 }
             }
@@ -179,7 +183,7 @@ public class ServicoAnimal {
             new Util().print("Animal não encontrado.\n");
         }
 
-        return String.format("Consulta " + UUID.randomUUID() + " marcada com sucesso.\n");
+        return String.format("Consulta " + consulta.getCodigo() + " marcada com sucesso.\n");
 
     }
 }

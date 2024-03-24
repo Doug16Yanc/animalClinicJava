@@ -37,15 +37,16 @@ public class ServicoCliente implements EuValido {
     }
     public boolean fazLogin(){
         boolean validou = false;
+        int chances = 3;
         new Util().print("Login do cliente.\n");
-        do{
-            System.out.println("Digite seu identificador : ");
-            int id = sc.nextInt();
+        System.out.println("Digite seu identificador : ");
+        int id = sc.nextInt();
 
-            Cliente procurado = clientes.stream().filter(cliente -> cliente.getIdCliente() == id)
-                    .findFirst().orElse(null);
-            sc.nextLine();
-            if (procurado != null) {
+        Cliente procurado = clientes.stream().filter(cliente -> cliente.getIdCliente() == id)
+                .findFirst().orElse(null);
+        sc.nextLine();
+        if (procurado != null) {
+            do {
                 System.out.println("Entre com suas credenciais.\n");
                 System.out.println("Usuário : ");
                 String usuario = sc.nextLine();
@@ -58,11 +59,13 @@ public class ServicoCliente implements EuValido {
                     break;
                 } else {
                     new Util().print("Credenciais inválidas.\n");
+                    chances--;
                 }
-            } else{
-                System.out.println("Cliente não encontrado.\n");
-            }
-        } while(true);
+            } while (chances > 0);
+        }
+        else{
+            System.out.println("Cliente não encontrado.\n");
+        }
         return validou;
     }
     public int geraId() {
@@ -134,7 +137,7 @@ public class ServicoCliente implements EuValido {
                     removerCadastro(cliente);
                 }
                 case 4 -> {
-
+                    new ServicoAnimal().iniciaPaginaAnimal(cliente);
                 }
                 case 5 -> {
                     new Util().print("Sua despedida é desconcertante. Até logo!\n");

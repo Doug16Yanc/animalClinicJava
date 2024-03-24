@@ -11,6 +11,6 @@ public class Comprovação {
     public void comprovaRegistroAnimal(Animal animal){
         new Util().print("Comprovo que o cliente " + animal.getCliente().getNomeCliente() + " de identificador igual a " +
                 animal.getCliente().getIdCliente() + " realizou cadastro do seu animal " +  animal.getIdAnimal() +
-                "em nossa plataforma.\n");
+                " em nossa plataforma.\n");
     }
 }

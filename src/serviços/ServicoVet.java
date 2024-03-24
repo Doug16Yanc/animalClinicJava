@@ -55,10 +55,10 @@ public class ServicoVet implements EuValido {
 
             switch (opcao) {
                 case 1 -> {
-
+                    realizarConsultas();
                 }
                 case 2 -> {
-
+                    listaConsultas();
                 }
                 case 3 -> {
                     new Util().print("Até a próxima!\n");
@@ -79,7 +79,7 @@ public class ServicoVet implements EuValido {
     private int realizarConsultas(){
         if (!consultas.isEmpty()){
             Animal animal = consultas.remove(0).getAnimal();
-            new ConsultaServico().processaConsulta(animal);
+            new ServicoConsulta().processaConsulta(animal);
         }
         else {
             new Util().print("Nenhuma consulta marcada.\n");
