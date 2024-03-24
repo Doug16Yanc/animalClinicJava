@@ -5,6 +5,7 @@ import domínio.Consulta;
 import domínio.Tratamento;
 import enums.StatusAnimal;
 import enums.TipoTratamento;
+import utilidades.Pagamento;
 import utilidades.Util;
 
 import static utilidades.Util.sc;
@@ -30,6 +31,7 @@ public class ServicoTratamento {
                 new Util().print("Opção impossível.\n");
             }
         }
+        new Pagamento().calculaPreco();
     }
     private String defineEstadoAnimal(Animal animal){
         System.out.println("Como se encontra o animal?\n " +
