@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8fd863c-2d92-4f1b-90b4-77aaadb3d700" name="Changes" comment="" />
+    <list default="true" id="c8fd863c-2d92-4f1b-90b4-77aaadb3d700" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repositórios/EuPago.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviços/ServicoAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviços/ServicoConsulta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoConsulta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviços/ServicoExame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoExame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviços/ServicoTratamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviços/ServicoTratamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilidades/Comprovação.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilidades/Comprovação.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilidades/Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilidades/Pagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilidades/UtilidadePagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilidades/UtilidadePagamento.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,6 +68,11 @@
           <url>file://$PROJECT_DIR$/src/aplicação/Program.java</url>
           <line>3</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/utilidades/UtilidadePagamento.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

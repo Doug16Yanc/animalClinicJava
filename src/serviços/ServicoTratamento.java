@@ -2,17 +2,20 @@ package serviços;
 
 import domínio.Animal;
 import domínio.Consulta;
+import domínio.Exame;
 import domínio.Tratamento;
 import enums.StatusAnimal;
 import enums.TipoTratamento;
 import utilidades.Pagamento;
 import utilidades.Util;
+import utilidades.UtilidadePagamento;
 
 import static utilidades.Util.sc;
 
 public class ServicoTratamento {
-    public void defineTratamento(Consulta consulta){
-        defineEstadoAnimal(consulta.getAnimal());
+    public void defineTratamento(Animal animal, Consulta consulta, Exame exame){
+        sc.nextLine();
+        defineEstadoAnimal(animal);
         System.out.println("Escreva uma descrição do tratamento pós diagnóstico:");
         String descricao = sc.nextLine();
         System.out.println("Defina a natureza do tratamento:\n C/c - Clínico \n D/d - Domiciliar\n");
@@ -31,7 +34,7 @@ public class ServicoTratamento {
                 new Util().print("Opção impossível.\n");
             }
         }
-        new Pagamento().calculaPreco();
+        new UtilidadePagamento().acertaContas(consulta, exame);
     }
     private String defineEstadoAnimal(Animal animal){
         System.out.println("Como se encontra o animal?\n " +

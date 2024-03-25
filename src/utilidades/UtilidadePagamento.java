@@ -6,7 +6,7 @@ import domínio.Exame;
 import static utilidades.Util.sc;
 
 public class UtilidadePagamento {
-    private Double determinaValor(Consulta consulta, Exame exame){
+    public static Double determinaValor(Consulta consulta, Exame exame){
         double valorTotal = new Pagamento().calculaPrecoTotal(consulta, exame) ;
         new Util().print("Definição dos valores:\n");
         System.out.println("Valor da consulta : " + consulta.getValor());
@@ -35,6 +35,7 @@ public class UtilidadePagamento {
                 new Util().print("Opção impossível.\n");
             }
         }
+        new Comprovação().comprovaPagamento(consulta, exame);
         return opcao;
     }
     private double determinaDinheiro(Consulta consulta, Exame exame){

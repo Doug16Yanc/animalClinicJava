@@ -21,7 +21,6 @@ public class ServicoAnimal {
     private static List<Animal> animais = new ArrayList<>();
     public static List<Consulta> consultas = new ArrayList<>();
     public void iniciaPaginaAnimal(Cliente cliente){
-        Animal animal = null;
         new Util().print("Página do pet.\n");
         System.out.println("O que desejas?\n");
         System.out.println("\n" +
@@ -37,16 +36,16 @@ public class ServicoAnimal {
                 registraAnimal(cliente);
             }
             case 2 -> {
-                removerAnimal(animal);
+                removerAnimal(animais);
             }
             case 3 -> {
                 listaAnimais();
             }
             case 4 -> {
-                visualizarAnimalDados(animal);
+                visualizarAnimalDados(animais);
             }
             case 5 -> {
-                marcaConsulta(animal);
+                marcaConsulta(animais);
             }
             default -> {
                 new Util().print("Opção impossível.\n");
@@ -76,40 +75,52 @@ public class ServicoAnimal {
         return entrada;
     }
     private void registraAnimal(Cliente cliente) {
-        Animal animal = null;
-        new Util().print("Registro de animal na clínica.\n");
+        System.out.println("Registro de animal na clínica.\n");
         int idAnimal = geraId();
+
         sc.nextLine();
-        System.out.println("Nome do animal (Campo opcional) : ");
+        System.out.println("Nome do animal (Campo opcional): ");
         String nome = sc.nextLine();
-        System.out.println("Idade : ");
+
+        System.out.println("Idade: ");
         int idade = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Espécie (Campo opcional) : ");
-        String especie = sc.nextLine();
-        System.out.println("Sexo : \n M/m - Macho \n F/f - Fêmea\n");
-        String sexo = sc.nextLine();
-        switch (sexo.toLowerCase()){
-            case "m" -> {
-                animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), SexoAnimal.MASCULINO, StatusAnimal.OBSERVAÇÃO);
-            }
-            case "f" ->  {
-                animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), SexoAnimal.FEMININO, StatusAnimal.OBSERVAÇÃO);
-            }
-            default -> {
-                animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), SexoAnimal.OUTRO, StatusAnimal.OBSERVAÇÃO);
-            }
+        if (idade <= 0) {
+            System.out.println("Idade inválida. A idade deve ser um número positivo.");
+            return;
         }
+
+        sc.nextLine();
+        System.out.println("Espécie (Campo opcional): ");
+        String especie = sc.nextLine();
+
+        System.out.println("Sexo (M/m para Macho, F/f para Fêmea): ");
+        String sexoInput = sc.nextLine().toUpperCase();
+        SexoAnimal sexo;
+        switch (sexoInput) {
+            case "M":
+                sexo = SexoAnimal.MASCULINO;
+                break;
+            case "F":
+                sexo = SexoAnimal.FEMININO;
+                break;
+            default:
+                sexo = SexoAnimal.OUTRO;
+                break;
+        }
+
+        Animal animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), sexo, StatusAnimal.OBSERVAÇÃO);
         animais.add(animal);
         new Comprovação().comprovaRegistroAnimal(animal);
     }
-    private void removerAnimal(Animal animal) {
-        if (procurarAnimal() == true){
-            if (animal.getStatusAnimal() == StatusAnimal.CURADO || animal.getStatusAnimal() == StatusAnimal.SAUDÁVEL){
-                new Util().print("Cadastro de " + animal.getIdAnimal() + " realizado com sucesso.\n");
+
+    private void removerAnimal(List<Animal> animal) {
+        Animal animalProcurado = procurarAnimal();
+        if (animalProcurado != null){
+            if (animalProcurado.getStatusAnimal() == StatusAnimal.CURADO || animalProcurado.getStatusAnimal() == StatusAnimal.SAUDÁVEL){
+                new Util().print("Cadastro de " + animalProcurado.getIdAnimal() + " realizado com sucesso.\n");
             }
             else{
-                new Util().print("O animal " + animal.getIdAnimal() + " ainda não está em condições apropriadas\n" +
+                new Util().print("O animal " + animalProcurado.getIdAnimal() + " ainda não está em condições apropriadas\n" +
                         "para você realizar a remoção dele de nossa plataforma.\n");
             }
         }
@@ -121,63 +132,66 @@ public class ServicoAnimal {
         for (Animal animal : animais){
             new Util().print("\nIdentificador : " + animal.getIdAnimal() +
                             "\nNome : " + animal.getNomeAnimal() +
-                            "\nEspécie : " + animal.getEspecie() +
+                            "\nEspécie : " + animal.getEspecie().getNomeEspecie() +
                             "\nSexo : " + animal.getSexoAnimal() +
                             "\nStatus atual : " + animal.getStatusAnimal());
         }
         return animais;
     }
-    private boolean procurarAnimal() {
+    private Animal procurarAnimal() {
         System.out.println("Digite o identificador do animal : ");
         int id = sc.nextInt();
 
-        Animal procurado = animais.stream().filter(cliente -> cliente.getIdAnimal() == id)
+        Animal procurado = animais.stream().filter(animal -> animal.getIdAnimal() == id)
                 .findFirst().orElse(null);
 
         if (procurado != null){
-            return true;
+            return procurado;
         }
         else{
-            return false;
+            return null;
         }
     }
-    private void visualizarAnimalDados(Animal animal){
-        if(procurarAnimal() == true){
+    private void visualizarAnimalDados(List<Animal> animal){
+        Animal animalProcurado = procurarAnimal();
+        if(animalProcurado != null){
             new Util().print("" +
-                    "\nIdentificador : " + animal.getIdAnimal() +
-                    "\nNome : " + animal.getNomeAnimal() +
-                    "\nEspécie : " + animal.getEspecie() +
-                    "\nSexo : " + animal.getSexoAnimal() +
-                    "\nStatus atual : " + animal.getStatusAnimal());
+                    "\nIdentificador : " + animalProcurado.getIdAnimal() +
+                    "\nNome : " + animalProcurado.getNomeAnimal() +
+                    "\nEspécie : " + animalProcurado.getEspecie().getNomeEspecie() +
+                    "\nSexo : " + animalProcurado.getSexoAnimal() +
+                    "\nStatus atual : " + animalProcurado.getStatusAnimal());
         }
         else{
             new Util().print("Animal não encontrado.\n");
         }
     }
-    private String marcaConsulta(Animal animal){
+    private String marcaConsulta(List<Animal> animal){
         Consulta consulta = null;
         UUID codigo = UUID.randomUUID();
         new Util().print("Consultas marcadas como urgentes apresentarão prioridades na lista das chamadas\n" +
                 "do profissional veterinário. Ao escolher convencional ou uma opção não existente, a consulta" +
                 " será considerada convencional.\n");
-        if(procurarAnimal() == true){
+        Animal animalProcurado = procurarAnimal();
+        if(animalProcurado != null){
             sc.nextLine();
             System.out.println("\nEstado da consulta solicitada? \n C/c - Convencional \n U/u - Urgente \n");
             String opcao = sc.nextLine();
             switch (opcao.toLowerCase()){
                 case "c" ->{
-                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.CONVENCIONAL, null);
+                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.CONVENCIONAL, null);
                     consultas.add(consulta);
                 }
                 case "u" -> {
-                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.URGENTE, null);
+                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.URGENTE, null);
                     consultas.add(0, consulta);
                 }
                 default -> {
-                    consulta = new Consulta(codigo, animal, 70.00, StatusConsulta.CONVENCIONAL, null);
+                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.CONVENCIONAL, null);
                     consultas.add(consulta);
                 }
             }
+            new Util().print("Consulta " + consulta.getCodigo() + " solicitada com sucesso.\n");
         }
         else {
             new Util().print("Animal não encontrado.\n");
