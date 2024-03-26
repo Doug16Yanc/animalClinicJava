@@ -13,14 +13,16 @@ public class Animal {
     private Espécie especie;
     private SexoAnimal sexoAnimal;
     private StatusAnimal statusAnimal;
+    private Consulta consulta;
 
-    public Animal(Cliente cliente, int idAnimal, String nomeAnimal, int idadeAnimal, Espécie especie, SexoAnimal sexoAnimal, StatusAnimal statusAnimal){
+    public Animal(Cliente cliente, int idAnimal, String nomeAnimal, int idadeAnimal, Espécie especie, SexoAnimal sexoAnimal, StatusAnimal statusAnimal, Consulta consulta){
         this.cliente = cliente;
         this.idAnimal = idAnimal;
         this.nomeAnimal = nomeAnimal;
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.statusAnimal = statusAnimal;
+        this.consulta = consulta;
     }
 
     public Cliente getCliente() {
@@ -77,5 +79,13 @@ public class Animal {
 
     public void setStatusAnimal(StatusAnimal statusAnimal) {
         this.statusAnimal = statusAnimal;
+    }
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 }

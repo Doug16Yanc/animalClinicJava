@@ -21,7 +21,7 @@ public class Pagamento implements EuCalculo {
     public Double calculaPrecoTotal(Consulta consulta, Exame exame){
         double valor = 0.0;
         valor += consulta.getValor() + calculaPrecoExames(exame);
-        return 0.0;
+        return valor;
     }
 
 }

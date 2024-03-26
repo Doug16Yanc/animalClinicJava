@@ -1,6 +1,7 @@
 package serviços;
 
 import domínio.Cliente;
+import domínio.Consulta;
 import enums.StatusCliente;
 import repositórios.EuValido;
 import utilidades.Comprovação;

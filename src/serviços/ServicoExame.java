@@ -12,7 +12,7 @@ import static utilidades.Util.sc;
 
 public class ServicoExame {
     public static List<Exame> exames = new ArrayList<>();
-    public void descreveExame(Animal animal, Consulta consulta) {
+    public void descreveExame(Animal animal) {
 
 
         System.out.println("Quantidade de exames pós prognóstico: ");
@@ -28,6 +28,6 @@ public class ServicoExame {
             exame.setDescricaoExame(descricao);
             exame.setValorExame(valor);
         }
-        new ServicoTratamento().defineTratamento(animal, consulta, exame);
+        new ServicoTratamento().defineTratamento(animal, exame);
     }
 }

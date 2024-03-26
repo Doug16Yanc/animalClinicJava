@@ -19,7 +19,7 @@ import static utilidades.Util.sc;
 
 public class ServicoAnimal {
     private static List<Animal> animais = new ArrayList<>();
-    public static List<Consulta> consultas = new ArrayList<>();
+    public static List<Animal> consultas = new ArrayList<>();
     public void iniciaPaginaAnimal(Cliente cliente){
         new Util().print("Página do pet.\n");
         System.out.println("O que desejas?\n");
@@ -108,7 +108,7 @@ public class ServicoAnimal {
                 break;
         }
 
-        Animal animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), sexo, StatusAnimal.OBSERVAÇÃO);
+        Animal animal = new Animal(cliente, idAnimal, nome, idade, new Espécie(especie), sexo, StatusAnimal.OBSERVAÇÃO, null);
         animais.add(animal);
         new Comprovação().comprovaRegistroAnimal(animal);
     }
@@ -167,7 +167,6 @@ public class ServicoAnimal {
         }
     }
     private String marcaConsulta(List<Animal> animal){
-        Consulta consulta = null;
         UUID codigo = UUID.randomUUID();
         new Util().print("Consultas marcadas como urgentes apresentarão prioridades na lista das chamadas\n" +
                 "do profissional veterinário. Ao escolher convencional ou uma opção não existente, a consulta" +
@@ -179,25 +178,27 @@ public class ServicoAnimal {
             String opcao = sc.nextLine();
             switch (opcao.toLowerCase()){
                 case "c" ->{
-                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.CONVENCIONAL, null);
-                    consultas.add(consulta);
+                    Consulta consulta = new Consulta(codigo, 70.00, StatusConsulta.CONVENCIONAL, null);
+                    animalProcurado.setConsulta(consulta);
+                    consultas.add(animalProcurado);
                 }
                 case "u" -> {
-                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.URGENTE, null);
-                    consultas.add(0, consulta);
+                    Consulta consulta = new Consulta(codigo, 70.00, StatusConsulta.URGENTE, null);
+                    animalProcurado.setConsulta(consulta);
+                    consultas.add(0, animalProcurado);
                 }
                 default -> {
-                    consulta = new Consulta(codigo, animalProcurado, 70.00, StatusConsulta.CONVENCIONAL, null);
-                    consultas.add(consulta);
+                    Consulta consulta = new Consulta(codigo, 70.00, StatusConsulta.CONVENCIONAL, null);
+                    animalProcurado.setConsulta(consulta);
+                    consultas.add(animalProcurado);
                 }
             }
-            new Util().print("Consulta " + consulta.getCodigo() + " solicitada com sucesso.\n");
         }
         else {
             new Util().print("Animal não encontrado.\n");
         }
 
-        return String.format("Consulta " + consulta.getCodigo() + " marcada com sucesso.\n");
+        return String.format("Consulta " + animalProcurado.getConsulta().getCodigo() + " marcada com sucesso.\n");
 
     }
 }

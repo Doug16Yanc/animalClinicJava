@@ -8,6 +8,7 @@ package aplicação;
 * Guedes, pesquisador de ciência da computação da Universidade Federal do Pampa (UniPampa)*/
 
 
+import domínio.Consulta;
 import serviços.ServicoCliente;
 import serviços.ServicoVet;
 import utilidades.Util;
@@ -21,6 +22,7 @@ public class Program {
         new Program().fazPrimeiraInteracao();
     }
     public String fazPrimeiraInteracao() {
+        sc.nextLine();
         String opcao;
         do {
             System.out.println("Quem é você na plataforma?\n" +

@@ -1,7 +1,6 @@
 package serviços;
 
 import domínio.Animal;
-import domínio.Consulta;
 import domínio.Veterinário;
 import repositórios.EuValido;
 import utilidades.Util;
@@ -63,7 +62,6 @@ public class ServicoVet implements EuValido {
                 case 3 -> {
                     new Util().print("Até a próxima!\n");
                     saiu = true;
-                    sc.nextLine();
                 }
                 default -> {
                     new Util().print("Opção impossível.\n");
@@ -71,14 +69,13 @@ public class ServicoVet implements EuValido {
             }
             if (saiu){
                 break;
-
             }
         } while (true);
         return opcao;
     }
     private int realizarConsultas(){
         if (!consultas.isEmpty()){
-            Animal animal = consultas.remove(0).getAnimal();
+            Animal animal = consultas.remove(0);
             new ServicoConsulta().processaConsulta(animal);
         }
         else {
@@ -86,14 +83,14 @@ public class ServicoVet implements EuValido {
         }
         return 1;
     }
-    private List<Consulta> listaConsultas(){
+    private List<Animal> listaConsultas(){
         if (!consultas.isEmpty()) {
-            for (Consulta consulta : consultas) {
+            for (Animal animal : consultas) {
                 new Util().print("" +
-                        "\nIdentificador do cliente solicitante : " + consulta.getAnimal().getCliente().getIdCliente() +
-                        "\nNome do cliente solicitante : " + consulta.getAnimal().getCliente().getNomeCliente() +
-                        "\nIdentificador do animal : " + consulta.getAnimal().getIdAnimal() +
-                        "\nStatus da consulta : " + consulta.getStatusConsulta());
+                        "\nIdentificador do cliente solicitante : " + animal.getCliente().getIdCliente() +
+                        "\nNome do cliente solicitante : " + animal.getCliente().getNomeCliente() +
+                        "\nIdentificador do animal : " + animal.getIdAnimal() +
+                        "\nStatus da consulta : " + animal.getConsulta().getStatusConsulta());
             }
         } else{
             new Util().print("Nenhuma consulta marcada.\n");

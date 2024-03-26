@@ -1,5 +1,6 @@
 package utilidades;
 
+import domínio.Animal;
 import domínio.Consulta;
 import domínio.Exame;
 
@@ -14,8 +15,8 @@ public class UtilidadePagamento {
         System.out.println("Valor total : " + valorTotal);
         return valorTotal;
     }
-    public int acertaContas(Consulta consulta, Exame exame){
-        determinaValor(consulta, exame);
+    public int acertaContas(Animal animal, Exame exame){
+        determinaValor(animal.getConsulta(), exame);
         System.out.println("\n Escolha uma opçao de pagamento.\n" +
                 "           1 - Dinheiro\n" +
                 "           2 - Cartão\n" +
@@ -23,19 +24,19 @@ public class UtilidadePagamento {
         int opcao = sc.nextInt();
         switch (opcao){
             case 1 -> {
-                determinaDinheiro(consulta, exame);
+                determinaDinheiro(animal.getConsulta(), exame);
             }
             case 2 -> {
-                determinaCartao(consulta, exame);
+                determinaCartao(animal.getConsulta(), exame);
             }
             case 3 -> {
-                validaPix(consulta, exame);
+                validaPix(animal.getConsulta(), exame);
             }
             default -> {
                 new Util().print("Opção impossível.\n");
             }
         }
-        new Comprovação().comprovaPagamento(consulta, exame);
+        new Comprovação().comprovaPagamento(animal, exame);
         return opcao;
     }
     private double determinaDinheiro(Consulta consulta, Exame exame){

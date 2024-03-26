@@ -19,13 +19,13 @@ public class Comprovação {
                 animal.getCliente().getIdCliente() + " realizou cadastro do seu animal " +  animal.getIdAnimal() +
                 " em nossa plataforma.\n");
     }
-    public void comprovaPagamento(Consulta consulta, Exame exame){
+    public void comprovaPagamento(Animal animal, Exame exame){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         new Util().print("COMPROVANTE DE PAGAMENTO.\n" +
-                "\n      Identificador do cliente" + consulta.getAnimal().getCliente().getIdCliente() +
-                "\n      Nome : " + consulta.getAnimal().getCliente().getNomeCliente() +
-                "\n      Identificador do animal : " + consulta.getAnimal().getIdAnimal() +
-                "\n      Valor total : " + UtilidadePagamento.determinaValor(consulta, exame) +
+                "\n      Identificador do cliente" + animal.getCliente().getIdCliente() +
+                "\n      Nome : " + animal.getCliente().getNomeCliente() +
+                "\n      Identificador do animal : " + animal.getIdAnimal() +
+                "\n      Valor total : " + UtilidadePagamento.determinaValor(animal.getConsulta(), exame) +
                 "\n      Código da operação de pagamento : " + UUID.randomUUID() +
                 "\n      Data e hora da operação : " + dateTimeFormatter);
     }

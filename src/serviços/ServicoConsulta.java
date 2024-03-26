@@ -15,17 +15,13 @@ public class ServicoConsulta {
 
         System.out.println("Necessidade de exames? \n S/s - Sim \n N/n - Não\n");
         String opcao = sc.nextLine();
-        Consulta consulta = consultas.stream()
-                .filter(c -> c.getAnimal().getIdAnimal() == animal.getIdAnimal())
-                .findFirst()
-                .orElse(null);
         switch (opcao){
             case "s" -> {
-                new ServicoExame().descreveExame(animal, consulta);
+                new ServicoExame().descreveExame(animal);
             }
             case "n" -> {
 
-                new ServicoTratamento().defineTratamento(animal, consulta, null);
+                new ServicoTratamento().defineTratamento(animal, null);
             }
             default -> {
                 new Util().print("Opção impossível.\n");

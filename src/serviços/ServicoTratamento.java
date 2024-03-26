@@ -13,7 +13,7 @@ import utilidades.UtilidadePagamento;
 import static utilidades.Util.sc;
 
 public class ServicoTratamento {
-    public void defineTratamento(Animal animal, Consulta consulta, Exame exame){
+    public void defineTratamento(Animal animal, Exame exame){
         sc.nextLine();
         defineEstadoAnimal(animal);
         System.out.println("Escreva uma descrição do tratamento pós diagnóstico:");
@@ -23,18 +23,18 @@ public class ServicoTratamento {
         switch (natureza){
             case "c" -> {
                 Tratamento tratamento = new Tratamento(descricao, TipoTratamento.CLÍNICO);
-                consulta.setTratamento(tratamento);
+                animal.getConsulta().setTratamento(tratamento);
             }
             case "d" -> {
                 Tratamento tratamento = new Tratamento(descricao, TipoTratamento.DOMICILIAR);
-                consulta.setTratamento(tratamento);
+                animal.getConsulta().setTratamento(tratamento);
 
             }
             default -> {
                 new Util().print("Opção impossível.\n");
             }
         }
-        new UtilidadePagamento().acertaContas(consulta, exame);
+        new UtilidadePagamento().acertaContas(animal, exame);
     }
     private String defineEstadoAnimal(Animal animal){
         System.out.println("Como se encontra o animal?\n " +
